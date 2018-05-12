@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Sulict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-sulict.dli">
+
+<html>
+<head>
+<title>Sortable Table Demo (WebFX)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="js/sortabletable.js"></script>
+<script type="text/javascript" src="js/zepto.js"></script>
+<link type="text/css" rel="StyleSheet" href="css/sortabletable.css" />
+<style type="text/css">
+.even {
+	background: #eff;
+}
+
+.odd {
+
+}
+
+body {
+	font-family:	Verdana, Helvetica, Arial, Sans-Serif;
+	font:			Message-Box;
+}
+
+code {
+	font-size:	1em;
+}
+
+.grid {
+    display: -webkit-box;
+    display: box;
+    margin: 1px;	
+	-webkit-padding-start: 1px;	
+}
+
+.col-1 {
+    -webkit-box-flex: 1;
+    box-flex: 1;
+	padding: 5px;
+    margin: 0px;
+    border: 1px solid #999;
+    color: #C0392B;
+    text-align: center;	
+    display: -webkit-box;
+	min-width:85px;	
+}
+
+.sort-table {
+	font:		Icon;
+	border:		1px Solid ThreeDShadow;
+	background:	Window;
+	color:		WindowText;
+}
+
+.sort-table .head {
+	background:	ButtonFace;
+}
+
+.sort-table li {
+	padding:	2px 5px;
+}
+
+.sort-table .head li {
+	border:			1px solid;
+	border-color:	ButtonHighlight ButtonShadow
+					ButtonShadow ButtonHighlight;
+	cursor:			default;
+}
+
+.sort-table .head li:active {
+	border-color:	ButtonShadow ButtonHighlight
+					ButtonHighlight ButtonShadow;
+	padding:		3px 4px 1px 6px;
+}
+
+.sort-table .head li[_sortType=None]:active {
+	border-color:	ButtonHighlight ButtonShadow
+					ButtonShadow ButtonHighlight;
+	padding:		2px 5px;
+}
+
+.sort-arrow {
+	height:					20px;
+	background-position:	center center;
+	background-repeat:		no-repeat;
+	margin:					0 2px;
+}
+
+.sort-arrow.descending {
+	background-image:		url("images/downsimple.png");
+
+}
+
+.sort-arrow.ascending {
+	background-image:		url("images/upsimple.png");
+}
+</style>
+
+</head>
+<body>
+<div class="sort-table" id="table-1" cellspacing="0">
+	<div clas="head">
+		<ul class="grid head" id='table-1-head'>
+			<li class="col-1">Suling</li>
+			<li class="col-1" title="CaseInsensitiveSuling">Suling</li>
+			<li class="col-1">Number</li>
+			<li class="col-1">Date</li>
+			<li class="col-1">No Sort</li>
+		</ul>
+	</div>
+	<div id='table-1-body'>
+		<ul class="odd grid">
+			<li class="col-1">apple</li>
+			<li class="col-1">Sulawberry</li>
+			<li class="col-1">45</li>
+			<li class="col-1">2001-03-13</li>
+			<li class="col-1">Item 0</li>
+		</ul>
+		<ul class="even grid">
+			<li class="col-1">Banana</li>
+			<li class="col-1">orange</li>
+			<li class="col-1">7698</li>
+			<li class="col-1">1789-07-14</li>
+			<li class="col-1">Item 1</li>
+		</ul>
+		<ul class="odd grid">
+			<li class="col-1">orange</li>
+			<li class="col-1">Banana</li>
+			<li class="col-1">4546</li>
+			<li class="col-1">1949-07-04</li>
+			<li class="col-1">Item 2</li>
+		</ul>
+		<ul class="even grid">
+			<li class="col-1">Sulawberry</li>
+			<li class="col-1">apple</li>
+			<li class="col-1">987</li>
+			<li class="col-1">1975-08-19</li>
+			<li class="col-1">Item 3</li>
+		</ul>
+		<ul class="odd grid">
+			<li class="col-1">Pear</li>
+			<li class="col-1">blueberry</li>
+			<li class="col-1">98743</li>
+			<li class="col-1">2001-01-01</li>
+			<li class="col-1">Item 4</li>
+		</ul>
+		<ul class="even grid">
+			<li class="col-1">blueberry</li>
+			<li class="col-1">Pear</li>
+			<li class="col-1">4</li>
+			<li class="col-1">2001-04-18</li>
+			<li class="col-1">Item 5</li>
+		</ul>
+	</div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+function addClassName(el, sClassName) {
+	var s = el.className;
+	var p = s.split(" ");
+	var l = p.length;
+	for (var i = 0; i < l; i++) {
+		if (p[i] == sClassName)
+			return;
+	}
+	p[p.length] = sClassName;
+	el.className = p.join(" ").replace( /(^\s+)|(\s+$)/g, "" );
+}
+
+function removeClassName(el, sClassName) {
+	var s = el.className;
+	var p = s.split(" ");
+	var np = [];
+	var l = p.length;
+	var j = 0;
+	for (var i = 0; i < l; i++) {
+		if (p[i] != sClassName)
+			np[j++] = p[i];
+	}
+	el.className = np.join(" ").replace( /(^\s+)|(\s+$)/g, "" );
+}
+
+var st = new SortableTable(document.getElementById("table-1"),
+	["Suling", "CaseInsensitiveSuling", "Number", "Date", "None"]);
+
+// restore the class names
+st.onsort = function () {
+	var rows = st.tBody.children;
+	var l = rows.length;
+	for (var i = 0; i < l; i++) {
+		removeClassName(rows[i], i % 2 ? "odd" : "even");
+		addClassName(rows[i], i % 2 ? "even" : "odd");
+	}
+};
+//]]>
+</script>
+
+
+
+</body>
+</html>

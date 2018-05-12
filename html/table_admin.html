@@ -1,0 +1,60 @@
+<script id="tablehead_template" type="text/x-dot-template">
+    <ul class="grid head" id='table-1-head'>
+	{{ for(var i=0; i< it.col.length; i++) { }}
+		<li class="col-1">{{=it.col[i][1]}}</li>
+	{{ } }}
+    </ul>	
+</script>
+<script id="tablebody_template" type="text/x-dot-template">
+	{{ for(var i=0; i< it.data.length; i++) { }}
+		{{? it.data[i]._title_  == undefined}}
+			{{? Math.round(i/2.0) == i/2.0 }}
+			<ul class="odd grid" >
+			{{?? }}
+			<ul class="even grid">
+			{{? }}
+		{{?? }}
+			{{? Math.round(i/2.0) == i/2.0 }}
+			<ul class="odd grid" title="{{=it.data[i]._title_ }}">
+			{{?? }}
+			<ul class="even grid" title="{{=it.data[i]._title_ }}">
+			{{? }}		
+		{{? }}
+		{{ for(var j=0; j< it.col.length; j++) { }}
+			{{? it.col[j][0] == "content" }}
+				<li class="col-1" style="max-width:190px;">{{= it.data[i][it.col[j][0]] }}</li>			
+			{{?? it.data[i][it.col[j][0]] != null }}
+				<li class="col-1">{{= it.data[i][it.col[j][0]] }}</li>		
+			{{?? }}
+				<li class="col-1"></li>
+			{{? }}
+		{{ } }}
+		</ul>
+	{{ } }}
+</script>
+
+<section id="table_admin" >
+  <header>
+    <nav class="left"> <a href="#" data-icon="previous" data-target="back">返回</a> </nav>
+    <h1 class="title"> <a href="#" onclick="can_table_refresh()" id="table_title">加载中...</a></h1>
+  </header>
+  <article class="active"  data-scroll="true" id="edit_article" style="padding: 10px 10px;">
+    <div class="list inset">
+      <form class="input-group" id="admin_table_from">
+        <div class="input-row" id="admin_date_div">
+          <label>开始*</label>
+          <input style="min-width:100px;" type="text" name="admin_start" id="admin_table_start" readonly="readonly">
+          <label>结束*</label>
+          <input style="min-width:100px;" type="text" name="admin_end" id="admin_table_end" readonly="readonly">
+        </div>
+      </form>
+      <div class="sort-table" id="table-1" cellspacing="0">
+        <div clas="head" id="table-head"></div>
+        <div id="refresh_table">
+          <div id="table-1-body"></div>
+        </div>
+      </div>
+      <div class="input-group"> </div>
+    </div>
+  </article>
+</section>

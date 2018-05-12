@@ -1,0 +1,114 @@
+<section id="add_section" >
+  <header>
+    <nav class="left"> <a href="#" data-icon="previous" data-target="back">返回</a> </nav>
+    <h1 class="title" id="add_list_title">添加客户</h1>
+  </header>
+  <script id="select_template" type="text/x-dot-template">
+    <label>{{=it.lab_name}}</label>
+    <select name="{{=it.select_id}}" id="add_{{=it.select_id}}">
+       	<option value="" selected="selected">请选择</option>
+		{{ for(var i=0; i< it.items.length; i++) { }}
+        <option value="{{=it.items[i].name}}" >{{=it.items[i].nick}}</option>
+		{{ } }}
+    </select>
+  </script>
+  <script id="add_select_template" type="text/x-dot-template">
+		<option value="" selected="selected">请选择</option>
+		{{ for(var i=0; i< it.length; i++) { }}
+		<option value="{{=it[i].id}}" >{{=it[i].nick}}</option>
+		{{ } }}
+  </script>
+  <script id="add_select_consul_template" type="text/x-dot-template">
+		{{ for(var i=0; i< it.length; i++) { }}
+		<option value="{{=it[i].id}}" >{{=it[i].nick}}</option>
+		{{ } }}
+  </script>
+  <article data-scroll="true" class="active" id="add_article" >
+    <div class="indented"> 
+      <!-- Input group with labels-->
+      <form class="input-group" id="add">
+        <div class="input-row">
+          <label>电话*</label>
+          <input type="text" placeholder="电话号码" name="name" id="add_phone">
+        </div>
+        <div class="input-row">
+          <label>姓名*</label>
+          <input type="text" placeholder="姓名/昵称" name="nick" id="add_name">
+        </div>
+        <div class="input-row">
+          <label>性别*</label>
+          <select name="sex" id="add_sex">
+          	<option value="" selected="selected">请选择
+            <option value="F" >女
+            <option value="M" >男
+            <option value="U" >未知
+          </select>
+        </div>
+        <div class="input-row">
+          <label>需求*</label>
+          <textarea name="xuqiu" id="add_xuqiu" draggable="false" rows="3" wrap="soft" maxlength="1024" placeholder="需求/问题(1000字以内）"></textarea>
+        </div>
+        <div class="input-row" id="div_laiyuan">
+          <label>加载中..</label>
+          <select name="fang_from" id="add_fang_from" >
+          	<option value="" selected="selected">请选择</option>        
+          </select>
+        </div>
+        <div class="input-row" id="div_dian">
+          <label>加载中..</label>
+          <select name="fang_dian" id="add_fang_dian" >
+          	<option value="" selected="selected">请选择</option>    
+          </select>
+        </div>
+        <div class="input-row">
+          <label>自带</label>
+          <select name="is_zidai" id="add_is_zidai">
+            <option value="0" selected="selected">否</option>
+          </select>
+        </div>        
+        <div class="input-row">
+          <label>备用电话</label>
+          <input type="text" placeholder="可填多个号码，用;分割" name="bakphone">
+        </div>
+        <a href="#" class="button block" data-icon="cogs" id="add_save" onclick="add_customer()">保存</a>
+      </form>
+       <!-- Input group with labels-->
+      <form class="input-group" id="add_C" style="display:none">
+        <div class="input-row">
+          <label>电话*</label>
+          <input type="text" placeholder="电话号码" name="name" id="addc_phone">
+        </div>
+        <div class="input-row">
+          <label>企业*</label>
+          <input type="text" placeholder="企业名称" name="nick" id="addc_name">
+        </div>
+        <div class="input-row">
+          <label>需求*</label>
+          <textarea name="xuqiu" id="addc_xuqiu" draggable="false" rows="3" wrap="soft" maxlength="1024" placeholder="需求/问题(1000字以内）"></textarea>
+        </div> 
+        <a href="#" class="button block" data-icon="cogs" id="addc_save" onclick="add_customer()">保存</a>
+      </form>
+      <form class="input-group" id="add_B" style="display:none">
+        <div class="input-row">
+          <label>电话*</label>
+          <input type="text" placeholder="小组负责人联系电话" name="name" id="addb_phone">
+        </div>
+        <div class="input-row">
+          <label>名称*</label>
+          <input type="text" placeholder="小组名称" name="nick" id="addb_name">
+        </div>
+        <div class="input-row">
+          <label>咨询师*</label>
+          <select name="consul_id" id="addb_consul" >
+          	<option value="" selected="selected">加载中...            
+          </select>
+        </div>
+        <div class="input-row">
+          <label>描述*</label>
+          <textarea name="xuqiu" id="addb_xuqiu" draggable="false" rows="3" wrap="soft" maxlength="1024" placeholder="小组情况描述(1000字以内）"></textarea>
+        </div>  
+        <a href="#" class="button block" data-icon="cogs" id="addb_save" onclick="add_customer()">保存</a>
+      </form>       
+    </div>
+  </article>
+</section>

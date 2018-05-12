@@ -1,0 +1,223 @@
+<section id="jiaofei_section" >
+  <header>
+    <nav class="left"> <a href="#" data-icon="previous" data-target="back">返回</a> </nav>
+    <h1 class="title"  id="jiaofei_title">加载中...</h1>
+  </header>
+  <script id="jiaofei_sele_template" type="text/x-dot-template">
+	  <label style="color:#666">咨询师</label>
+      <input type="text" style="color:#666;width:90px" readonly="readonly" value="{{=it.nick}}"> 
+	  <input type="hidden" name="consultant" id="jiaofei_selct_consultant" value="{{=it.id}}"> 
+  </script> 
+  <script type="text/html" id="jiaofei_popup_danci">
+        <div style="padding:10px 20px;">
+            <div style="text-align:center;font-size:20px;color:#3498DB;font-weight:600;margin:5px 0;">单次缴费确认	</div>
+	    	<div class="input-group">
+				<div class="input-row" id="danci_input_shijian">
+					<label>咨询时间：</label>
+					<label id="danci_popup_shijian" style="color:#F00"></label>
+					<label id="danci_popup_bushiyue" style="color:#F00; display:none"></label>
+				</div>
+				<div class="input-row" id="danci_input_dingjin">
+					<label>订金：</label>
+					<label id="danci_popup_dingjin" style="color:#F00"></label>
+				</div>
+				<div class="input-row" id="danci_input_bushi">
+					<label>补时：</label>
+					<label id="danci_popup_bushi" style="color:#F00"></label>
+				</div>	
+				<div class="input-row" id="danci_input_shiyongyue" style="display:none">
+					<label>使用余额：</label>
+					<label id="danci_popup_shiyongyue" style="color:#F00;"></label>
+				</div>									
+				<div class="input-row" id="danci_input_heji">
+					<label style="color:#00F">*缴费*：</label>
+					<label id="danci_popup_heji" style="color:#F00;font-weight:bold"></label>
+				</div>					
+				<div class="input-row">
+					<button class="col-1" data-icon="icon close" data-target="closePopup">取消</button>
+					<div  class="col-1"> </div>
+					<button  class="col-1" data-icon="checkmark" data-target="closePopup" onclick="jiaofei_submit('dc')">确定</button>
+				</div>
+			</div>
+        </div>
+  </script> 
+  <script type="text/html" id="jiaofei_popup_xilie">
+        <div style="padding:10px 20px;">
+            <div style="text-align:center;font-size:20px;color:#3498DB;font-weight:600;margin:5px 0;">系列缴费确认</div>
+			<div class="input-group">
+				<div class="input-row" id="xilie_input_shijian">
+					<label>咨询时间：</label>
+					<label id="xilie_popup_shijian" style="color:#F00"></label>
+					<label id="xilie_popup_bushiyue" style="color:#F00; display:none"></label>					
+				</div>
+				<div class="input-row" id="xilie_input_chaoshi">
+					<label>超时：</label>
+					<label id="xilie_popup_chaoshi" style="color:#F00"></label>
+				</div>				
+    			<div class="input-row" id="xilie_input_bushi">
+					<label>补时：</label>
+					<label id="xilie_popup_bushi" style="color:#F00"></label>
+				</div>
+				<div class="input-row" id="xilie_input_xiaoshi">
+					<label>系列小时：</label>
+					<label id="xilie_popup_xiaoshi" style="color:#F00"></label>
+				</div>
+				<div class="input-row" id="xilie_input_dingjin">
+					<label>订金：</label>
+					<label id="xilie_popup_dingjin" style="color:#F00"></label>
+				</div>	
+				<div class="input-row" id="xilie_input_shiyongyue" style="display:none">
+					<label>使用余额：</label>
+					<label id="xilie_popup_shiyongyue" style="color:#F00;"></label>
+				</div>							
+				<div class="input-row" id="xilie_input_chaoshi_jf">
+					<label style="color:#00F">*超缴费*：</label>
+					<label id="xilie_popup_chaoshi_jf" style="color:#F00;font-weight:bold"></label>
+				</div>					
+				<div class="input-row" id="xilie_input_heji">
+					<label style="color:#00F">*缴费*：</label>
+					<label id="xilie_popup_heji" style="color:#F00;font-weight:bold"></label>
+				</div>
+				<div class="input-row" id="xilie_input_fenqi">
+					<label style="color:#00F">*本次*：</label>
+					<label id="xilie_popup_fenqi" style="color:#F00;font-weight:bold"></label>
+				</div>				
+				<div class="input-row">
+					<button class="col-1" data-icon="icon close" data-target="closePopup">取消</button>
+					<div  class="col-1"> </div>
+					<button  class="col-1" data-icon="checkmark" data-target="closePopup" onclick="jiaofei_submit('xl')">确定</button>
+				</div>
+			</div>
+        </div>
+  </script> 
+  <script type="text/html" id="jiaofei_popup_tuihuan">
+        <div style="padding:10px 20px;">
+            <div style="text-align:center;font-size:20px;color:#3498DB;font-weight:600;margin:5px 0;">退还订金确认</div>
+			<div class="input-group">
+				<div class="input-row" id="tuihuan_input_dingj">
+					<label>退还订金：</label>
+					<label id="tuihuan_popup_dingj" style="color:#F00"></label>
+				</div>
+			<div class="input-row">
+					<button class="col-1" data-icon="icon close" data-target="closePopup">取消</button>
+					<div  class="col-1"> </div>
+					<button  class="col-1" data-icon="checkmark" data-target="closePopup" onclick="dingjin_tuihuan()">确定</button>
+				</div>
+			</div>
+        </div>
+  </script>
+  <article data-scroll="true" class="active" id="jiaofei_article" >
+    <div class="indented"> 
+      <!-- Input group with labels-->
+      <div class="input-group">
+        <form id="jiaofei_time" class="input-group">
+          <div class="input-row">
+            <label>开始时间</label>
+            <input type="text" placeholder="时分秒" onchange="jishi_change()" id="jiaofei_start" name="time_start">
+            <label>结束时间</label>
+            <input type="text" placeholder="时分秒" onchange="jishi_change()" id="jiaofei_end"  name="time_end">
+          </div>
+        </form>
+        <div class="divider">
+          <div class="col-5">
+            <label>&nbsp;&nbsp;余额：&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <label style="width:120px; color:#F00;font-weight:bold" id="jiaofei_dingjin">加载中...</label>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <!-- <input type="button" value="退还" style="color:#666" onclick="jiaofei_tijiao('jiaofei_popup_tuihuan')" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+            <label>&nbsp;&nbsp;余时：&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <label  style="width:100px;color:#00F;font-weight:bold" id="shengyu_bushi">加载中...</label>
+          </div>
+        </div>
+        <div class="input-row">
+          <div class="input-row" id="jiaofei_consultant">
+            <label style="color:#666">咨询师</label>
+            <input type="text" name="consultant" id="jiaofei_selct_consultant"  style="color:#666"  readonly="readonly" value="加载中..">
+          </div>
+          <label class="long" id="jiaofei_danjia"></label>
+        </div>
+        <div class="input-row">
+          <label>调整价格</label>
+          <input type="text" placeholder="元/小时" id="danci_dj" name="danci_dj" onchange="jiaofei_js()" onkeyup="formatNum(this)" onblur="formatNum(this)">
+        </div>
+      </div>
+      <form class="input-group" id="jiaofei_benci_dingj_bushi">
+        <div class="divider" onclick="show_change_id('#jioafei_dingbu', '#divider_dingbu', '&nbsp;&nbsp;本次定金补时')" id="divider_dingbu">&nbsp;&nbsp;+本订定金补时</div>
+        <div class="input-row" style="display:none;" id="jioafei_dingbu">
+          <label>收订金</label>
+          <input type="text" placeholder="元" name="dingjin" id="quanju_dingjin" onchange="jiaofei_js();" onkeyup="formatFloat(this)" onblur="formatFloat(this)">
+          <label style="display:none">加补时</label>
+          <input style="display:none" type="text" placeholder="分钟" name="bushi" id="jiaofei_geiyu_bushi" style="color:#00F" onchange="jiaofei_js()" onkeyup="formatNum(this)" onblur="formatNum(this)">
+  		  <label>补时</label>
+          <input type="text" placeholder="分钟" name="jian_bushi" id="jiaofei_benci_bushi" style="color:#00F" onchange="jishi_change()" onkeyup="formatNum(this)" onblur="formatNum(this)">
+        </div>
+      </form>
+      <form class="input-group" id="danci_from" style="display: none;">
+        <div class="divider">
+          <label>&nbsp;&nbsp;单次:</label>
+        </div>
+        <div class="input-row">
+          <label>咨询时长</label>
+          <input type="text" placeholder="分钟" name="danci_sc" id="danci_zixunsc" style="color:#00F" onchange="danci_zongji()" onkeyup="formatNum(this)" onblur="formatNum(this)" readonly="readonly">
+        </div>
+        <div class="input-row">
+          <label style="color:#666">总计缴费</label>
+          <input type="text" placeholder="人民币/元" name="danci_heji" id="danci_heji" style="color:#F00; font-weight:bold" readonly="readonly">
+        </div>
+        <a href="#" class="button block" data-icon="cogs" onclick="jiaofei_tijiao('jiaofei_popup_danci')">结算提交</a>
+      </form>
+      <form class="input-group" id="xilie_from" style="display: none;">
+        <div class="divider" id="jiaofei_xilie_divider">
+          <label>&nbsp;&nbsp;系列:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+          <label>剩余时长：</label>
+          <label  style="width:100px;color:#00F;font-weight:bold" id="shengyu_shichang">加载中...</label>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <label id="jiaofei_qianfei2" style="display:none">欠费：</label>
+          <label style="width:100px;color:#F00;display:none;font-weight:bold" id="jiaofei_qianfei">加载中...</label>
+        </div>
+        <div class="input-row">
+          <label style="width:90px;">咨询时长</label>
+          <input type="text" placeholder="分钟" name="xilie_sc" id="xilie_zixunsc" style="color:#00F; min-width:70px" onkeyup="formatNum(this)" onblur="formatNum(this)" onchange="xilie_zongji()" readonly="readonly">
+        </div>
+        <div class="input-row">
+          <label style="width:60px;color:#666">超时</label>
+          <input type="text" placeholder="分钟" name="xilie_chaoshi" id="xilie_chaoshi" style="color:#F00;min-width:60px" readonly="readonly">
+          <label style="width:60px;color:#666">补交</label>
+          <input type="text" placeholder="元" name="xilie_bujiao" id="xilie_bujiao" style="color:#F00; min-width:100px; font-weight:bold" readonly="readonly">
+        </div>
+        <div class="divider" id="jiaofei_xilieshoufei"  onclick="show_change_id('#jiaofei_xilie_block', '#jiaofei_xilieshoufei', '&nbsp;&nbsp;系列收费时')">&nbsp;&nbsp;+系列收费</div>
+        <div style="display:none" id="jiaofei_xilie_block">
+          <div class="input-row">
+            <label>系列时间</label>
+            <!-- 注意和数据库一致 -->
+            <select name="xilie_type" id="jiaofei_xilie_shijian" onchange="get_jiaofei_xilie_price()" style="width:90px">
+              <option value="0" selected="selected">请选择
+              <option value="10">10小时</option>
+              <option value="20">20小时</option>
+              <option value="30">30小时</option>
+              <option value="50">50小时</option>
+              <option value="100">100小时</option>
+            </select>
+            <label class="long" id="jiaofei_xilie"></label>
+          </div>
+          <div class="input-row">
+            <label>调整系列</label>
+            <input type="text" placeholder="元/小时" id="xilie_dj" name="xilie_dj" onchange="xilie_zongji()" onkeyup="formatNum(this)" onblur="formatNum(this)">
+          </div>
+          <div class="input-row">
+            <label style="color:#666">系列金额</label>
+            <input type="text" placeholder="元" name="xilie_heji" id="xilie_heji" style="color:#F00; font-weight:bold" readonly="readonly">
+            <label>分期</label>
+            <input type="text" placeholder="元" name="xilie_fenqi" id="xilie_fenqi" style="color:#F00; font-weight:bold">
+          </div>
+        </div>
+        <a href="#" class="button block" data-icon="cogs" onclick="jiaofei_tijiao('jiaofei_popup_xilie')">结算提交</a>
+      </form>
+    </div>
+  </article>
+</section>
+<script>
+function show_change_id(id, cid, s){
+	$(id).show();
+	$(cid).html(s);
+}
+</script>

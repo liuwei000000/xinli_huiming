@@ -1,0 +1,69 @@
+<section id="editqy_section" >
+  <header>
+    <nav class="left"> <a href="#" data-icon="previous" data-target="back">返回</a> </nav>
+    <h1 class="title" id="editqy_title">加载中...</h1>
+  </header>
+  <script id="edit_template" type="text/x-dot-template">
+  	<div class="divider">修改企业信息</div>
+    <form class="input-group" id='edit'>
+	  <div class="input-row">
+          <label>电话*</label>
+          <input type="text" placeholder="电话号码" name="name" value="{{=it.name}}" id="edit_name">	
+	  </div>
+      <div class="input-row">
+        <label>姓名*</label>
+        <input type="text" name="nick" placeholder="姓名/昵称" value="{{=it.nick}}" id="edit_nick">
+	  </div>
+      <div class="input-row">
+        <label>需求</label>
+        <textarea name="xuqiu" draggable="false" rows="4" wrap="soft" maxlength="1024" placeholder="需求/问题(1000字以内" id="edit_xuqiu">{{=it.xuqiu}}</textarea>
+      </div>
+      <div class="input-row">
+          <label>咨询师</label>
+          <select name="consul_id" id="visitor_consultant">
+            <option value="" selected="selected">加载中..
+          </select>
+		   <label>（转介）</label>
+        </div>
+      <div class="input-row">
+        <label>备用电话</label>
+        <input name="bakphone" type="text" placeholder="可填多个号码，用;分割"  value="{{=it.bakphone}}">
+      </div>
+      <a href="#" class="button block" data-icon="cogs" onclick="edit_customer()">保存</a>
+    </form>	
+  </script>
+  <article data-scroll="true" class="active" id="edit_article" >
+    <div>
+      <div class="indented" id="edit_area">
+        <div class="divider">修改企业信息</div>
+        <form class="input-group">
+          <div class="input-row">
+            <label>姓名*</label>
+            <input type="text" placeholder="姓名/昵称" value="加载中..">
+          </div>
+          <div class="input-row">
+            <label>需求*</label>
+            <textarea draggable="false" rows="2" wrap="soft" maxlength="1024" placeholder="需求/问题(1000字以内）"></textarea>
+          </div>
+          <div class="input-row">
+            <label>咨询师*</label>
+            <select name="consultant" id="visitor_consultant">
+              <option value="" selected="selected">加载中..
+            </select>
+          </div>
+          <div class="input-row">
+            <label>备用电话</label>
+            <input type="text" placeholder="可填多个号码，用;分割">
+          </div>
+          <a class="button block" data-icon="cogs">保存</a>
+        </form>
+      </div>
+      <div id="refresh_fang" style="padding: 0px 5px 5px;">
+        <div id="the-scroller-fang">
+          <ul class="list inset" id="huifang_list">
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>

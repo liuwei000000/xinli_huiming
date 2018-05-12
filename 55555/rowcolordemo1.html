@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html>
+<head>
+<title>Sortable Table Demo (WebFX)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="js/sortabletable1.js"></script>
+<link type="text/css" rel="StyleSheet" href="css/sortabletable.css" />
+<style type="text/css">
+.even {
+	background: #eee;
+}
+
+.odd {
+
+}
+
+body {
+	font-family:	Verdana, Helvetica, Arial, Sans-Serif;
+	font:			Message-Box;
+}
+
+code {
+	font-size:	1em;
+}
+
+.grid {
+    display: -webkit-box;
+    display: box;
+    margin: 1px;	
+	-webkit-padding-start: 1px;	
+}
+
+.col-1 {
+    -webkit-box-flex: 1;
+    box-flex: 1;
+	padding: 5px;
+    margin: 0px;
+    border: 1px solid #999;
+    color: #C0392B;
+    text-align: center;	
+    display: -webkit-box;
+	min-width:85px;	
+}
+
+.sort-table {
+	font:		Icon;
+	border:		1px Solid ThreeDShadow;
+	background:	Window;
+	color:		WindowText;
+}
+
+.sort-table thead {
+	background:	ButtonFace;
+}
+
+.sort-table td {
+	padding:	2px 5px;
+}
+
+.sort-table thead td {
+	border:			1px solid;
+	border-color:	ButtonHighlight ButtonShadow
+					ButtonShadow ButtonHighlight;
+	cursor:			default;
+}
+
+.sort-table thead td:active {
+	border-color:	ButtonShadow ButtonHighlight
+					ButtonHighlight ButtonShadow;
+	padding:		3px 4px 1px 6px;
+}
+
+.sort-table thead td[_sortType=None]:active {
+	border-color:	ButtonHighlight ButtonShadow
+					ButtonShadow ButtonHighlight;
+	padding:		2px 5px;
+}
+
+.sort-arrow {
+	height:					20px;
+	background-position:	center center;
+	background-repeat:		no-repeat;
+	margin:					0 2px;
+}
+
+.sort-arrow.descending {
+	background-image:		url("images/downsimple.png");
+
+}
+
+.sort-arrow.ascending {
+	background-image:		url("images/upsimple.png");
+}
+
+</style>
+
+</head>
+<body>
+
+<table class="sort-table" id="table-1" cellspacing="0">
+	<col />
+	<col />
+	<col style="text-align: right" />
+	<col />
+	<col />
+	<thead id="table-1-head">
+		<tr>
+			<td>String</td>
+			<td title="CaseInsensitiveString">String</td>
+			<td>Number</td>
+			<td>Date</td>
+			<td>No Sort</td>
+		</tr>
+	</thead>
+	<tbody id="table-1-body">
+		<tr class="odd">
+			<td>apple</td>
+			<td>Strawberry</td>
+			<td>45</td>
+			<td>2001-03-13</td>
+			<td>Item 0</td>
+		</tr>
+		<tr class="even">
+			<td>Banana</td>
+			<td>orange</td>
+			<td>7698</td>
+			<td>1789-07-14</td>
+			<td>Item 1</td>
+		</tr>
+		<tr class="odd">
+			<td>orange</td>
+			<td>Banana</td>
+			<td>4546</td>
+			<td>1949-07-04</td>
+			<td>Item 2</td>
+		</tr>
+		<tr class="even">
+			<td>Strawberry</td>
+			<td>apple</td>
+			<td>987</td>
+			<td>1975-08-19</td>
+			<td>Item 3</td>
+		</tr>
+		<tr class="odd">
+			<td>Pear</td>
+			<td>blueberry</td>
+			<td>98743</td>
+			<td>2001-01-01</td>
+			<td>Item 4</td>
+		</tr>
+		<tr class="even">
+			<td>blueberry</td>
+			<td>Pear</td>
+			<td>4</td>
+			<td>2001-04-18</td>
+			<td>Item 5</td>
+		</tr>
+	</tbody>
+</table>
+
+<script type="text/javascript">
+//<![CDATA[
+function addClassName(el, sClassName) {
+	var s = el.className;
+	var p = s.split(" ");
+	var l = p.length;
+	for (var i = 0; i < l; i++) {
+		if (p[i] == sClassName)
+			return;
+	}
+	p[p.length] = sClassName;
+	el.className = p.join(" ").replace( /(^\s+)|(\s+$)/g, "" );
+}
+
+function removeClassName(el, sClassName) {
+	var s = el.className;
+	var p = s.split(" ");
+	var np = [];
+	var l = p.length;
+	var j = 0;
+	for (var i = 0; i < l; i++) {
+		if (p[i] != sClassName)
+			np[j++] = p[i];
+	}
+	el.className = np.join(" ").replace( /(^\s+)|(\s+$)/g, "" );
+}
+
+var st = new SortableTable(document.getElementById("table-1"),
+	["String", "CaseInsensitiveString", "Number", "Date", "None"]);
+
+// restore the class names
+st.onsort = function () {
+	var rows = st.tBody.rows;
+	var l = rows.length;
+	for (var i = 0; i < l; i++) {
+		removeClassName(rows[i], i % 2 ? "odd" : "even");
+		addClassName(rows[i], i % 2 ? "even" : "odd");
+	}
+};
+//]]>
+</script>
+
+
+
+</body>
+</html>

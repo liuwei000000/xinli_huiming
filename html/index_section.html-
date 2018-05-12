@@ -1,0 +1,37 @@
+
+<section id="index_section" class="active">
+  <header>
+    <h1 class="title">客户管理</h1>
+    <nav class="right"> <a data-target="section" data-icon="info" href="#"></a> </nav>
+  </header>
+  <article id="refresh_article" class="active" data-scroll="true" style="padding: 10px 0;">
+    <div>
+      <ul class="list">
+        <li class="divider grid">
+          <div class="col-5" style="width: 100px;">电话：1354564564</div>
+        </li>
+        <li class="grid">
+          <div class="col-1"> <a href="#edit_section" data-target="section"><strong>A-池女士</strong>
+            <p>情绪压抑</p>
+            </a> </div>
+          <div class="lab_yuyue"><a href="#yuyue_section" data-target="section">预约</a></div>
+          <div class="lab_huifang"><a href="#fang_section" data-target="section">回访</a></div>
+        </li>
+        <li class="divider"></li>
+        <li class="divider grid">
+          <div class="col-5" style="width: 100px;">电话：1354564564</div>
+        </li>
+        <li class="grid">
+          <div class="col-1"> <strong>B-盛小姐</strong><span class="lab_zixun">咨询中...</span>
+            <p>职场、紧张、焦虑</p>
+          </div>
+          <div class="lab_kaishi">开始</div>
+          <div class="lab_jieshu">结束</div>
+        </li>
+      </ul>
+    </div>
+  </article>
+  <footer> <a href="#add_section" data-target="section">
+    <div class="add">添加客户</div>
+    </a> </footer>
+</section>

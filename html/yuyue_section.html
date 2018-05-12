@@ -1,0 +1,231 @@
+<section id="yuyue_section"  class="active">
+  <header>
+    <nav class="left"> <a href="#" data-icon="previous" data-target="back">返回</a> </nav>
+    <h1 class="title" id="yuyue_title">加载中...</h1>
+    <nav class="right"> <a data-target="section" class="icon menu" id="yuyue_edit_visitor"></a> </nav>
+  </header>
+  <script id="yuyue_sele_template" type="text/x-dot-template">
+  	{{? it.select_cons_id == null }}
+	    <label>咨询师*</label>
+        <select name="consultant" id="selct_consultant" onchange=get_yuyue(false) style="width:180px">
+		<option value="" selected="selected">请选择
+		{{ for(var i=0; i< it.consultant.length; i++) { }}
+   		<option value="{{=it.consultant[i][0]}}" >{{=it.consultant[i][1]}}
+		{{ } }}
+		</select>
+	{{?? }}	
+	    <label>咨询师*</label>
+		<input type="text" value="{{=it.select_cons_nick}}" readonly="readonly">	
+        <input type="hidden" name="consultant" value="{{=it.select_cons_id}}">	
+	{{? }}
+  </script>
+  <script id="mendian_sele_template" type="text/x-dot-template">
+	<label>门店*</label>
+    <select name="mendian" id="selct_mendian">
+	<option value="" selected="selected">请选择
+	{{ for(var i=0; i< it.dian.length; i++) { }}
+   	<option value="{{=it.dian[i].name}}" >{{=it.dian[i].nick}}
+	{{ } }}
+	</select>
+  </script> 
+  <script id="yuyue_yuyue_template" type="text/x-dot-template">
+    <div class="divider" id="yuyue_dian_map_title"></div>
+	{{ for(var i=0; i< it.shijiand.length; i++) { }}
+		<div class="grid one-part">
+			<div class="yuyue-block" style=" background-color:#333">{{=it.shijiand[i]}}</div>
+			{{ for(var j=0; j< it.room.length; j++) { }}
+				{{? it.yuyue != undefined && it.yuyue[i+1] != undefined  &&  it.yuyue[i+1][j+1] != undefined }}
+					{{? it.yuyue[i+1][j+1] == "3"}}
+						<input type="hidden" name="{{=i+1}}-{{=it.dian}}{{=j+1}}" value="3">
+<div class="yuyue-block-d" name="{{=i+1}}-{{=it.dian}}{{=j+1}}" onclick="yuyue_ding('{{=i+1}}-{{=it.dian}}{{=j+1}}', '{{=it.room[j]}}')">{{=it.room[j]}}││订</div>
+					{{?? }}
+						<input type="hidden" name="{{=i+1}}-{{=it.dian}}{{=j+1}}" value="1:{{=it.yuyue[i+1][j+1]}}">
+						<div class="yuyue-block-m" name="{{=i+1}}-{{=it.dian}}{{=j+1}}">{{=it.room[j]}}││满
+						<br><font style="font-size: 10px;color:#CCC;">{{=it.yuyue[i+1][j+1]}}</font></div>
+					{{? }}
+				{{?? }}
+					<input type="hidden" name="{{=i+1}}-{{=it.dian}}{{=j+1}}" value="0">		
+					<div class="yuyue-block-k" name="{{=i+1}}-{{=it.dian}}{{=j+1}}" onclick="yuyue_ding('{{=i+1}}-{{=it.dian}}{{=j+1}}', '{{=it.room[j]}}')">{{=it.room[j]}}││空</div>
+				{{? }}
+			{{ } }}
+		</div>
+	{{ } }}			
+  </script>
+  <article data-scroll="true" class="active" id="yuyue_article">
+    <div class="indented">
+      <!-- Input group with labels-->
+      <div class="input-row">
+        <label style="width:70px">余额：</font></label>
+        <label style="min-width:120px;color:#F00" id="yuyue_shengyu_zijin">加载中...</label>
+        <label style="width:70px">余时：</label>
+        <label style="min-width:120px;color:#F00" id="yuyue_shengyu_shichang">加载中...</label>
+      </div>
+      <form class="input-group" id="yuyue">
+        <div class="input-row">
+          <label>日期*</label>
+          <input type="text" name="date" id="yuyue_data" readonly="readonly"  placeholder="选择日期">
+        </div>        
+        <div class="input-row"  id="yuyue_mendian">
+          <label>门店*</label>
+          <select name="mendian">
+            <option value="" selected="selected">加载中..
+          </select>
+        </div>
+        <div class="input-row" id="yuyue_consultant">
+          <label>咨询师*</label>
+          <select name="consultant" id="selct_consultant">
+            <option value="" selected="selected">先选择日期和门店
+          </select>
+        </div>
+        <div id="yuyue_dian">
+          <div class="divider">先选择日期和门店</div>
+          <div class="grid one-part">
+          	<div class="yuyue-block" style=" background-color:#333">09:00-09:30</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+           </div>
+          <div class="grid one-part">
+          	<div class="yuyue-block" style=" background-color:#333">09:30-10:00</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+           </div>   
+           <div class="grid one-part">
+          	<div class="yuyue-block" style=" background-color:#333">10:00-10:30</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+           </div>
+          <div class="grid one-part">
+          	<div class="yuyue-block" style=" background-color:#333">10:30-11:00</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+           </div>                   
+           <div class="grid one-part">
+          	<div class="yuyue-block" style=" background-color:#333">11:00-11:30</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+           </div>
+          <div class="grid one-part">
+          	<div class="yuyue-block" style=" background-color:#333">11:30-12:00</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+           </div>
+          <div class="grid one-part">
+          	<div class="yuyue-block" style=" background-color:#333">12:00-12:30</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+           </div>
+          <div class="grid one-part">
+          	<div class="yuyue-block" style=" background-color:#333">12:30-13:00</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+           </div>   
+           <div class="grid one-part">
+          	<div class="yuyue-block" style=" background-color:#333">13:00-13:30</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+           </div>
+          <div class="grid one-part">
+          	<div class="yuyue-block" style=" background-color:#333">13:30-14:00</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+           </div>                   
+           <div class="grid one-part">
+          	<div class="yuyue-block" style=" background-color:#333">14:00-14:30</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+           </div>
+          <div class="grid one-part">
+          	<div class="yuyue-block" style=" background-color:#333">14:30-15:00</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+           </div>
+          <div class="grid one-part">
+          	<div class="yuyue-block" style=" background-color:#333">15:00-15:30</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+           </div>   
+          <div class="grid one-part">
+          	<div class="yuyue-block" style=" background-color:#333">15:30-16:00</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+           </div>                   
+           <div class="grid one-part">
+          	<div class="yuyue-block" style=" background-color:#333">16:00-16:30</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+           </div>
+          <div class="grid one-part">
+          	<div class="yuyue-block" style=" background-color:#333">16:30-17:00</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+           </div>
+          <div class="grid one-part">
+          	<div class="yuyue-block" style=" background-color:#333">17:00-17:30</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+           </div>
+          <div class="grid one-part">
+          	<div class="yuyue-block" style=" background-color:#333">17:30-18:00</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+           </div>       
+           <div class="grid one-part">
+          	<div class="yuyue-block" style=" background-color:#333">18:00-18:30</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+           </div>
+          <div class="grid one-part">
+          	<div class="yuyue-block" style=" background-color:#333">18:30-19:00</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+           </div>
+          <div class="grid one-part">
+          	<div class="yuyue-block" style=" background-color:#333">19:00-19:30</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+           </div>   
+		   <div class="grid one-part">
+          	<div class="yuyue-block" style=" background-color:#333">20:00-20:30</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+           </div>
+          <div class="grid one-part">
+          	<div class="yuyue-block" style=" background-color:#333">20:30-21:00</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+           </div>
+          <div class="grid one-part">
+          	<div class="yuyue-block" style=" background-color:#333">21:00-21:30</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+            <div class="yuyue-block-k">----</div>
+           </div>                    
+        </div>
+        <a class="button block" data-icon="cogs" onclick="yuyue_visitor()" id="yuyue_save">保存</a>
+      </form>
+    </div>
+  </article>
+</section>

@@ -1,0 +1,52 @@
+<section id="profile_admin" >
+  <header>
+    <nav class="left"> <a href="#" data-icon="previous" data-target="back">返回</a> </nav>
+    <h1 class="title">个人账号</h1>
+  </header>
+  <article data-scroll="true" class="active" id="profile_article" >  	
+    <div class="indented">
+      <!-- Input group with labels-->      
+      <form class="input-group" id="changeps">
+        <div class="divider">&nbsp;&nbsp;&nbsp;&nbsp;修改密码</div>
+        <div class="input-row">
+          <label>修改密码*</label>
+          <input type="password" placeholder="密码" name="password" id="password">
+        </div>
+        <div class="input-row">
+          <label>再次输入*</label>
+          <input type="password" placeholder="密码" name="password1" id="password1">
+        </div>
+        <a href="#" class="button block" data-icon="cogs" onclick="edit_profile()">保存</a>
+      </form>
+    </div>
+  </article>
+</section>
+<script type="text/javascript">
+function edit_profile() {
+	if (($('#password').val() =="") ) {
+		alert('请填写打完星号的项目');
+		return;
+	}
+	
+	if (($('#password').val() != $('#password1').val()) ) {
+		alert('两次密码不一样');
+		return;
+	}
+	
+  	$.ajax({
+		url : 'ajax.php?action=changeps',
+		dataType: "json", 
+        data : $('#changeps').serialize(),
+        type : 'post',
+        success : function(data){
+			alert(data.msg);
+			if (data.success == -1) {
+				window.location.href="index.php"; 
+			}
+        },
+        error : function(){
+			alert('网络错误');
+        }
+     })
+}
+</script>

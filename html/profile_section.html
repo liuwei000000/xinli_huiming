@@ -1,0 +1,79 @@
+<script type="text/html" id="ticheng_popup_passwd">
+		<div style="padding:10px 20px;">
+			<div style="text-align:center;font-size:20px;color:#3498DB;font-weight:600;margin:5px 0;">请输入密码</div>
+			<form class="input-group" id="chakan_ps">
+				<div class="input-row">
+					<label>输入密码*</label>
+					<input type="password" placeholder="密码" name="tic_ps" id="tic_ps">
+				</div>
+				<a href="#" class="button block" data-icon="cogs" onclick="ticheng_chakan()">提交</a>
+			 </form>
+		</div>
+</script>
+<section id="profile_section" >
+  <header>
+    <nav class="left"> <a href="#" data-icon="previous" data-target="back">返回</a> </nav>
+    <h1 class="title">个人账号</h1>
+  </header>
+  <article data-scroll="true" class="active" id="profile_article" >
+    <div class="indented">
+      <div id="the-scroller-profile">
+        <ul class="list">
+          <li class="grid" id="zixunshi_paiban" style="display:none">
+            <div class="col-1"> <a href="#paiban_section" data-target="section"><strong>咨询师排班</strong>
+              <p>记录咨询师培训休假等日程</p>
+              </a></div>
+          </li>
+          <li class="divider"></li>
+          <li class="grid">
+            <div class="col-1"> <a data-target="section"><strong>助理值班表</strong>
+              <p>助理店面值班表</p>
+              </a></div>
+          </li>          
+          <li class="divider"></li>
+          <li class="grid">
+            <div class="col-1"> <a href="#visitor_section" data-target="section"><strong>预约记录</strong>
+              <p>查看所有的预约记录</p>
+              </a></div>
+          </li>
+          <li class="divider"></li>
+          <li class="grid">
+            <div class="col-1"> <a href="#" data-target="section" id="profile_xiaozu"><strong>小组操作</strong>
+              <p>进行小组操作</p>
+              </a></div>
+          </li> 
+          <li class="divider"></li>
+          <li class="grid">
+            <div class="col-1"> <a href="#" data-target="section" id="profile_qiye"><strong>企业客户</strong>
+              <p>进行企业客户操作</p>
+              </a></div>
+          </li> 
+          <li class="divider"></li>
+          <li class="grid">
+            <div class="col-1"> <a href="#" data-target="section" onclick="show_ticheng_ps('ticheng_popup_passwd')"><strong>提成明细</strong>
+              <p>查看所有咨询记录及提成</p>
+              </a></div>
+          </li>
+          <li class="divider"></li>
+        </ul>
+      </div>
+      <!-- Input group with labels-->
+      <form class="input-group" id="changeps">
+        <div class="divider">&nbsp;&nbsp;&nbsp;&nbsp;修改密码</div>
+        <div class="input-row">
+          <label>原始密码*</label>
+          <input type="password" placeholder="密码" name="passwold" id="passwold">
+        </div>
+        <div class="input-row">
+          <label>修改密码*</label>
+          <input type="password" placeholder="密码" name="password" id="password">
+        </div>
+        <div class="input-row">
+          <label>再次输入*</label>
+          <input type="password" placeholder="密码" name="password1" id="password1">
+        </div>
+        <a href="#" class="button block" data-icon="cogs" onclick="change_ps()">保存</a>
+      </form>
+    </div>
+  </article>
+</section>

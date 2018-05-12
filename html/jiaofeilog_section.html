@@ -1,0 +1,50 @@
+<script id="visitorlog_template" type="text/x-dot-template">
+	{{ for(var i=0; i< it.length; i++) { }}
+		<li class="divider grid">
+            <div class="col-5"> 消费日期：{{=it[i].op_time}}</div>
+        </li>
+        <li class="grid">
+			<div class="col-1">咨询师:{{=it[i].cons_nick}}
+				<p>助理:{{=it[i].assi_nick}}</p>
+			</div>
+			<div class="lab_jiage">
+				<div class="tag_shichang">时:{{=it[i].shichang}}分</div>
+				<div class="tag_danjia">单:{{=(it[i].cash * 60.0/it[i].shichang).toFixed(0)}}</div>
+			</div>
+			<div class="lab_jine">
+				<div class="tag_jinge">额:{{=(it[i].cash * 1.0).toFixed(0)}}</div>
+			</div>
+        </li>
+		<li class="divider"></li>
+	{{ } }}
+</script>
+
+<section id="jiaofeilog_section" >
+  <header>
+    <nav class="left"> <a href="#" data-icon="previous" data-target="back">返回</a> </nav>
+    <h1 class="title" id="jiaofei_log_title">加载中...</h1>
+  </header>
+  <article data-scroll="true" class="active" style="padding: 10px 0;">
+    <div id="refresh_jiaofei_log" style="padding: 0px 5px 5px;">
+      <div id="the-scroller-jiaofeilog">
+        <ul class="list" id="jiaofeilog_list">
+          <li class="divider grid">
+            <div class="col-5"> 消费日期：加载中...</div>
+          </li>
+          <li class="grid">
+            <div class="col-1">咨询师：加载中...
+              <p>首问助理：加载中...</p>
+            </div>
+            <div class="lab_jiage">
+              <div class="tag_shichang">时：加载..</div>
+              <div class="tag_danjia">单：加载..</div>
+            </div>
+            <div class="lab_jine">
+              <div class="tag_jinge">额：加载..</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </article>
+</section>
